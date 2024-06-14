@@ -140,9 +140,9 @@ details>summary:hover {
 /* summary>i {
     margin-right: 8px;
     margin-bottom: 10px;
-} */
+} 
 
-/* details>summary>i.fas {
+details>summary>i.fas {
     transition: transform 0.5s ease;
 
 }
