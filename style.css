@@ -132,6 +132,11 @@ details>summary {
     transition: background-color 0.5s linear, color 0.5s linear;
 }
 
+details>summary:hover {
+    background-color: var(--accentColor);
+    color: var(--bgColor);
+}
+
 /* summary>i {
     margin-right: 8px;
     margin-bottom: 10px;
