@@ -72,10 +72,45 @@
             max-height: 90vh;
             border-radius: 8px;
         }
+
+        .back-float {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 56px;
+            height: 56px;
+            background-color: #1e1e1e;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 50%;
+            border: 1px solid #444;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            z-index: 10000;
+        }
+
+        .back-float:hover {
+            background-color: #333;
+            transform: scale(1.1);
+        }
+
+        .back-float svg {
+            width: 28px;
+            height: 28px;
+        }
     </style>
 </head>
 
 <body>
+    <a href="../" class="back-float" aria-label="Back to Home">
+        <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="14 18 8 12 14 6" />
+        </svg>
+    </a>
 
     <div class="grid" id="imageGrid"></div>
 
