@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 1rem;
+            font-family: sans-serif;
+            background-color: rgb(24, 26, 27);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+            gap: 1rem;
+        }
+
+        .grid-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .grid-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s;
+        }
+
+        .grid-item img:hover {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Popup overlay styles */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="grid" id="imageGrid"></div>
+
+    <!-- Image popup -->
+    <div class="popup-overlay" id="popupOverlay">
+        <img id="popupImage" src="" alt="Popup" />
+    </div>
+
+    <script>
+        fetch('images.json')
+            .then(response => response.json())
+            .then(images => {
+                const grid = document.getElementById('imageGrid');
+                const popup = document.getElementById('popupOverlay');
+                const popupImg = document.getElementById('popupImage');
+
+                images.forEach(filename => {
+                    const container = document.createElement('div');
+                    container.className = 'grid-item';
+
+                    const img = document.createElement('img');
+                    img.src = 'images/' + filename;
+                    img.alt = filename;
+
+                    container.appendChild(img);
+                    grid.appendChild(container);
+
+                    container.addEventListener('click', () => {
+                        popupImg.src = img.src;
+                        popup.classList.add('active');
+                    });
+                });
+
+                popup.addEventListener('click', () => {
+                    popup.classList.remove('active');
+                    popupImg.src = '';
+                });
+
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape') {
+                        popup.classList.remove('active');
+                        popupImg.src = '';
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Failed to load image list:', error);
+            });
+    </script>
+
+</body>
+
+</html>
