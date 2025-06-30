@@ -31,7 +31,7 @@ jobs:
           DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         run: |
           echo "AWS CLI VERSION: $(aws --version)"
-          FILES="index.html style.css images/profile.png"
+          FILES="index.html style.css images/profile.png portfolio/images.json portfolio/index.html"
           CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
           SHOULD_INVALIDATE="false"
           
